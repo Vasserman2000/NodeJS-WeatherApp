@@ -12,6 +12,4 @@ add (4,6, (result) => {
     console.log(result);
 });
 
-//call function
-//set callback function
-//implement callback
+
