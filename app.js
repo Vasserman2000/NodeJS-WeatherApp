@@ -49,22 +49,7 @@ let getDarkSkyToken = function () {
     return '2a82c8bdfe73c0c8788432b45fb9ee99';
 }
 
-let getCoordinates = function (city, token, callback) {
-    const geoUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${city}.json?access_token=${token}`;
 
-    request({url: geoUrl, json: true}, (error, response) => {
-        var coordinates, center = response.body.features[0].center;
-        var city = response.body.features[0].text;
-        if (center) {
-            coordinates = {
-                'longitude': center[0],
-                'latitude': center[1],
-                'city': city
-            };
-            callback(coordinates);
-        }
-    });
-};
 
 let getWeather = function (coordinates) {
     var token = getDarkSkyToken();
