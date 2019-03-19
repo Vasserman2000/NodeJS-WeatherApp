@@ -1,4 +1,5 @@
 const request = require('request');
+const geocode = require('./utils/geocode');
 
 // var latitude, longitude;
 
@@ -29,13 +30,13 @@ const request = require('request');
 // });
 
 
-let displayWeather = function (city) {
+const displayWeather = function (city) {
 
-    // get token:
+    // get MapBox token:
     var token = getMapboxToken();
 
     // get coordinates:
-    getCoordinates(city, token, (coordinates) => {
+    geocode(city, token, (error, coordinates) => {
         // now get weather:
         getWeather(coordinates);
     });
