@@ -1,5 +1,5 @@
-const request = require('request');
 const geocode = require('./utils/geocode');
+const forecast = require('./utils/forecast');
 
 // var latitude, longitude;
 
@@ -32,36 +32,14 @@ const geocode = require('./utils/geocode');
 
 const displayWeather = function (city) {
 
-    // get MapBox token:
-    var token = getMapboxToken();
-
-    // get coordinates:
-    geocode(city, token, (error, coordinates) => {
-        // now get weather:
-        getWeather(coordinates);
-    });
+    geocode(city, (error, coordinates) => {
+        if (error) {
+            return console.log(error);
+        } else {
+            forecast(error, coordinates);
+        }
+    }); 
 };
-
-let getMapboxToken = function () {
-    return 'pk.eyJ1IjoidmFzc2VybWFuMjAwMCIsImEiOiJjanQ2OWdra3AwNWlvNDNtenpvOXJhenA1In0.64v1LxmIGdbMYtB6LVzwHg';
-}
-
-let getDarkSkyToken = function () {
-    return '2a82c8bdfe73c0c8788432b45fb9ee99';
-}
-
-
-
-let getWeather = function (coordinates) {
-    var token = getDarkSkyToken();
-
-    var url = `https://api.darksky.net/forecast/${token}/${coordinates.latitude},${coordinates.longitude}?units=si&lang=en`;
-
-    request({url: url, json: true}, (error, response) => {
-        console.log(coordinates.city);
-        console.log(response.body.currently.temperature);
-    });
-}
 
 
 
