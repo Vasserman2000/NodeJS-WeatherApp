@@ -4,9 +4,9 @@ const common = require('./common');
 const getCoordinates = function (city, callback) {
     var token = common.getMapboxToken();
 
-    const mapBoxUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${city}.json?access_token=${token}`;
+    const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${city}.json?access_token=${token}`;
 
-    request({url: mapBoxUrl, json: true}, (error, response) => {
+    request({url, json: true}, (error, response) => {
         if (error) {
             callback('Unable to connect  to location services!', undefined);
         } else if (response.body.message) {
@@ -20,7 +20,7 @@ const getCoordinates = function (city, callback) {
                 coordinates = {
                     'longitude': center[0],
                     'latitude': center[1],
-                    'city': city,
+                    city,
                     'geoResponse': response
                 };
                 callback(undefined, coordinates);
