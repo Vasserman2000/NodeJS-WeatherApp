@@ -4,7 +4,7 @@ const app = express();
 
 // if someone requests this page, this function would describe what will be sent back
 app.get('', (req, res) => {
-    res.send('Hello express!')
+    res.send('<h1 style="background:yellow">Hello express!</h1>')
 });
 
 app.get('/help', (req, res) => {
@@ -12,7 +12,10 @@ app.get('/help', (req, res) => {
 });
 
 app.get('/about', (req, res) => {
-    res.send('About');
+    res.send({
+        name: 'Elisha',
+        age: 33
+    });
 });
 
 app.get('/weather', (req, res) => {
