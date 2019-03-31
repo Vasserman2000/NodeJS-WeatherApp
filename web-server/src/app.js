@@ -48,14 +48,20 @@ app.get('/weather', (req, res) => {
             error: 'You must provide location!'
         });
     }
-    res.send(`Your weather search is for: ${req.query.location}`);   
+    //res.send(`Your weather search is for: ${req.query.location}`);   
     geoCode(req.query.location, (error, coordinates) => {
         if (error) {
             return console.log(error);
         }
-        
-        forecast(error, coordinates);
-    }); 
+        // res.send({
+        //     error: coordinates
+        // });
+        forecast(error, coordinates, (callback) => {
+            res.send({
+                callback
+            });
+        });
+    });
 });
 
 app.get('/help/*', (req, res) => {
