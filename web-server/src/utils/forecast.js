@@ -2,7 +2,7 @@ const request = require('request');
 const common = require('./common');
 const chalk = require('chalk');
 
-const getWeather = function (error, {latitude, longitude, geoResponse}, callback ) {
+const getWeather = function ({latitude, longitude, geoResponse}, callback ) {
     var token = common.getDarkSkyToken();
 
     var url = `https://api.darksky.net/forecast/${token}/${latitude},${longitude}?units=si&lang=en`;
@@ -15,7 +15,7 @@ const getWeather = function (error, {latitude, longitude, geoResponse}, callback
         }
         console.log('Forecast for:', chalk.yellow(geoResponse.body.features[0].place_name));
         console.log(chalk.green('Temperature:'),body.currently.temperature, 'degrees,', chalk.green('Percip:'), body.currently.precipProbability, '%');
-        callback('Temperature:' + body.currently.temperature + 'degrees,' + 'Percip:' + body.currently.precipProbability, '%');
+        callback({ currently: body.currently });
     });
 }
 

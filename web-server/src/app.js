@@ -19,6 +19,7 @@ hbs.registerPartials(partialsPath);
 // Setup static directory to serve
 app.use(express.static(publicDirectoryPath));
 
+/* Index page */
 app.get('', (req, res) => {
     res.render('index', {
         title: 'Weather App',
@@ -26,6 +27,7 @@ app.get('', (req, res) => {
     });
 });
 
+/* Help page */
 app.get('/help', (req, res) => {
     res.render('help', {
         author: 'ElishaV',
@@ -34,6 +36,7 @@ app.get('/help', (req, res) => {
     });
 });
 
+/* About page */
 app.get('/about', (req, res) => {
     res.render('about', {
         author: 'ElishaV',
@@ -42,28 +45,29 @@ app.get('/about', (req, res) => {
     });
 });
 
+/* Weather page */
 app.get('/weather', (req, res) => {
-    if (!req.query.location) {
+    var location = req.query.location;
+    if (!location) {
         return res.send({
             error: 'You must provide location!'
         });
-    }
-    //res.send(`Your weather search is for: ${req.query.location}`);   
-    geoCode(req.query.location, (error, coordinates) => {
+    }   
+    geoCode(location, (error, coordinates) => {
         if (error) {
             return console.log(error);
         }
-        // res.send({
-        //     error: coordinates
-        // });
-        forecast(error, coordinates, (callback) => {
+
+        forecast(coordinates, (weather) => {
             res.send({
-                callback
+                weather
             });
         });
     });
 });
 
+
+/* 404 page */
 app.get('/help/*', (req, res) => {
     res.render('404', {
         errorMessage: 'Help article not found',
