@@ -55,7 +55,7 @@ app.get('/weather', (req, res) => {
     }   
     geoCode(location, (error, coordinates) => {
         if (error) {
-            return console.log(error);
+            return res.send({error});
         }
 
         forecast(coordinates, (weather) => {
