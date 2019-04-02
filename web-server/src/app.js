@@ -66,6 +66,24 @@ app.get('/weather', (req, res) => {
     });
 });
 
+app.get('/random-city', (req, res) => {
+    res.send({ 'cities':[
+        {city: 'Netanya'},
+        {city: 'Budapest'},
+        {city: 'Prague'},
+        {city: 'Dresden'},
+        {city: 'Nicosia'},
+        {city: 'Zaporizhzhia'},
+        {city: 'Jerusalem'},
+        {city: 'Tel-Aviv'},
+        {city: 'Kiev'},
+        {city: 'Moscow'},
+        {city: 'Paris'},
+        {city: 'London'},
+        {city: 'Milan'},
+        {city: 'Madrid'}
+    ]}.cities[Math.floor(Math.random() * 14)]);
+})
 
 /* 404 page */
 app.get('/help/*', (req, res) => {
