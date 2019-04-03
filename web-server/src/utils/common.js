@@ -14,7 +14,7 @@ let getRandomCity = function (callback) {
         if (!err) {
             const citiesJson = (JSON.parse(data)).cities;
             const citiesCount = citiesJson.length;
-            callback(citiesJson[Math.floor(Math.random() * citiesCount)].city);
+            callback(citiesJson[Math.floor(Math.random() * citiesCount)]);
         } else {
             console.log(err);
         }
