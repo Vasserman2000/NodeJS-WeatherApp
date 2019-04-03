@@ -3,6 +3,7 @@ const express = require('express');
 const hbs = require('hbs');
 const geoCode = require('./utils/geocode');
 const forecast = require('./utils/forecast');
+const common = require('./utils/common');
 
 const app = express();
 
@@ -67,22 +68,9 @@ app.get('/weather', (req, res) => {
 });
 
 app.get('/random-city', (req, res) => {
-    res.send({ 'cities':[
-        {city: 'Netanya'},
-        {city: 'Budapest'},
-        {city: 'Prague'},
-        {city: 'Dresden'},
-        {city: 'Nicosia'},
-        {city: 'Zaporizhzhia'},
-        {city: 'Jerusalem'},
-        {city: 'Tel-Aviv'},
-        {city: 'Kiev'},
-        {city: 'Moscow'},
-        {city: 'Paris'},
-        {city: 'London'},
-        {city: 'Milan'},
-        {city: 'Madrid'}
-    ]}.cities[Math.floor(Math.random() * 14)]);
+    common.getRandomCity((city) => {
+        res.send(city);
+    });
 })
 
 /* 404 page */
