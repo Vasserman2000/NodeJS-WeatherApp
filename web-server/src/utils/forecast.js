@@ -15,7 +15,10 @@ const getWeather = function ({latitude, longitude, geoResponse}, callback ) {
         }
         console.log('Forecast for:', chalk.yellow(geoResponse.body.features[0].place_name));
         console.log(chalk.green('Temperature:'),body.currently.temperature, 'degrees,', chalk.green('Percip:'), body.currently.precipProbability, '%');
-        callback({ currently: body.currently });
+        callback({ 
+            currently: body.currently,
+            geoResponse
+         });
     });
 }
 

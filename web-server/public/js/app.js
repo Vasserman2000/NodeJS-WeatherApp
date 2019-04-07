@@ -21,7 +21,7 @@ weatherForm.addEventListener('submit', (e) => {
     fetch(`/weather?location=${location}}`).then((response => {
     response.json().then((data) => {
         if (data.weather) {
-            messageParagraph.textContent = `The temperature is  ${data.weather.currently.temperature}`;
+            messageParagraph.textContent = `The temperature for ${data.weather.geoResponse.body.features[0].place_name} is  ${data.weather.currently.temperature}`;
         } else {
             messageParagraph.textContent = data.error;
         }
